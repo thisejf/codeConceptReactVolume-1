@@ -1,6 +1,8 @@
 import React, {Component} from 'react';
 import ButtonGroup from "./ButtonGroup";
 import {toast} from "react-toastify";
+import Display from "./Display";
+import Message from "./Message";
 
 class Timer extends Component {
     state = {
@@ -78,12 +80,9 @@ class Timer extends Component {
     render() {
         return (
             <div className="container my-5">
-                <h1>{ this.props.title }</h1>
-                <h2>
-                   duree: { this.formatDuration() }
-                </h2>
+                <Display title={this.props.title} timerValue={this.formatDuration()} />
                 <ButtonGroup onStart={this.start} onStop={this.stop} onReset={this.reset} />
-                <div>{ this.state.message }</div>
+                <Message text={this.state.message} />
             </div>
         );
     }
