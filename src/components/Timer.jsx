@@ -9,6 +9,23 @@ class Timer extends Component {
         message: ''
     };
 
+    prependZero = value => {
+        return value < 10 ? "0" + value.toString() : value.toString();
+    };
+
+    formatDuration = () => {
+        const minutes = Math.floor(this.state.duration / 60);
+        const secondes = Math.floor(this.state.duration % 60);
+        return `${this.prependZero(minutes)}:${this.prependZero(secondes)}`;
+    };
+
+    componentDidMount() {
+        this.setState({
+            initialValue: parseInt(this.props.duration, 10) * 60,
+            duration: parseInt(this.props.duration, 10) * 60,
+        });
+    }
+
     componentWillUnmount() {
         this.clean();
     }
@@ -52,13 +69,13 @@ class Timer extends Component {
 
     render() {
         return (
-            <div>
-                <h2>Pomodoro</h2>
-                <h3>{ this.state.message }</h3>
-                <div>
-                   duree: { this.state.duration}
-                </div>
-                <ButtonGroup onStart={this.start} onStop={this.stop} onReset={this.reset}/>
+            <div className="container my-5">
+                <h1>{ this.props.title }</h1>
+                <h2>
+                   duree: { this.formatDuration() }
+                </h2>
+                <ButtonGroup onStart={this.start} onStop={this.stop} onReset={this.reset} />
+                <div>{ this.state.message }</div>
             </div>
         );
     }
