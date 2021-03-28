@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import ButtonGroup from "./ButtonGroup";
+import {toast} from "react-toastify";
 
 class Timer extends Component {
     state = {
@@ -7,6 +8,10 @@ class Timer extends Component {
         duration: 10,
         handle: 0,
         message: ''
+    };
+
+    notify = (text, type) => {
+        toast[type](text, { autoClose: 2000 });
     };
 
     prependZero = value => {
@@ -54,17 +59,20 @@ class Timer extends Component {
             handle,
             message: ''
         });
+        this.notify('Start', 'success');
     };
 
     stop = () => {
         this.clean('pause');
+        this.notify('Pause', 'warn');
     };
 
     reset = () => {
         this.clean('reset');
         this.setState({
             duration: this.state.initialValue
-        })
+        });
+        this.notify('Reset', 'error');
     };
 
     render() {
