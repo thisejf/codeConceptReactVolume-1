@@ -1,12 +1,13 @@
 import React, {Component} from 'react';
+import Button from "./Button";
 
 class ButtonGroup extends Component {
     render() {
         return (
             <div>
-                <button onClick={this.props.onStart}>Start</button>
-                <button onClick={this.props.onStop}>Stop</button>
-                <button onClick={this.props.onReset}>Reset</button>
+                <Button text="Start" onBtnClick={ this.props.onStart } />
+                <Button text="Stop" onBtnClick={ this.props.onStop } />
+                <Button text="Reset" onBtnClick={ this.props.onReset} />
             </div>
         );
     }
